@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Leave By</title>
+    <meta name="description" content="Type a flight number and date. Get a leave-the-house time." />
+    <meta name="theme-color" content="#000000" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Leave By" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="top">
+        <div class="brand">Leave By</div>
+        <div class="sub" id="tzHint">America/Chicago</div>
+      </header>
+
+      <section class="hero" id="hero" aria-live="polite">
+        <div class="hero-label">Leave by</div>
+        <div class="leave-time" id="leaveTime">—</div>
+        <div class="countdown" id="countdown"></div>
+        <p class="hero-empty" id="heroEmpty">Enter a flight, or an airport and departure time.</p>
+      </section>
+
+      <div id="banners"></div>
+
+      <section class="card" id="summaryCard" hidden>
+        <h2>Flight</h2>
+        <div class="row"><span class="k">Airline</span><span class="v" id="sumAirline">—</span></div>
+        <div class="row"><span class="k">Origin</span><span class="v" id="sumOrigin">—</span></div>
+        <div class="row"><span class="k">Departure</span><span class="v" id="sumDepart">—</span></div>
+        <div class="row"><span class="k">Boarding</span><span class="v" id="sumBoard">—</span></div>
+      </section>
+
+      <section class="card" id="breakCard" hidden>
+        <h2>Breakdown</h2>
+        <div class="row"><span class="k">Departure</span><span class="v" id="bdDepart">—</span></div>
+        <div class="row"><span class="k">Boarding</span><span class="v" id="bdBoard">—</span></div>
+        <div class="row"><span class="k">TSA wait</span><span class="v" id="bdTsa">—</span></div>
+        <div class="row"><span class="k">Drive</span><span class="v" id="bdDrive">—</span></div>
+        <div class="row"><span class="k">Parking / walk</span><span class="v" id="bdPark">—</span></div>
+        <p class="note" id="bdNote"></p>
+      </section>
+
+      <a class="linkish" id="mapsLink" hidden href="#">Open in Apple Maps</a>
+
+      <form id="form" novalidate>
+        <section class="card">
+          <div class="field">
+            <label for="flight">Flight number</label>
+            <input id="flight" name="flight" inputmode="text" autocapitalize="characters" autocomplete="off" placeholder="AA1234" />
+          </div>
+          <div class="field">
+            <label for="date">Travel date</label>
+            <input id="date" name="date" type="date" required />
+          </div>
+        </section>
+
+        <label class="card toggle" for="precheck">
+          <span>TSA PreCheck</span>
+          <span class="switch">
+            <input type="checkbox" id="precheck" />
+            <i></i>
+          </span>
+        </label>
+
+        <details class="card" id="overrides">
+          <summary>Overrides &amp; buffers</summary>
+          <div class="grid2">
+            <div class="field">
+              <label for="origin">Origin airport</label>
+              <input id="origin" name="origin" maxlength="3" autocapitalize="characters" placeholder="DFW" />
+            </div>
+            <div class="field">
+              <label for="depart">Departure time</label>
+              <input id="depart" name="depart" type="time" />
+            </div>
+          </div>
+          <div class="grid2">
+            <div class="field">
+              <label for="driveMin">Drive minutes</label>
+              <input id="driveMin" name="driveMin" type="number" min="0" max="600" inputmode="numeric" placeholder="auto" />
+            </div>
+            <div class="field">
+              <label for="tsaMin">TSA minutes</label>
+              <input id="tsaMin" name="tsaMin" type="number" min="0" max="240" inputmode="numeric" placeholder="auto" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="parkMin">Parking / walk to checkpoint (min)</label>
+            <input id="parkMin" name="parkMin" type="number" min="0" max="180" value="15" />
+          </div>
+          <div class="field">
+            <label for="leadMin">Boarding lead if airline did not post one (min)</label>
+            <input id="leadMin" name="leadMin" type="number" min="0" max="180" value="30" />
+          </div>
+          <div class="seg" role="group" aria-label="Domestic or international">
+            <button type="button" id="domBtn" aria-pressed="true">Domestic</button>
+            <button type="button" id="intlBtn" aria-pressed="false">International</button>
+          </div>
+        </details>
+
+        <button class="primary" id="go" type="submit">Leave by…</button>
+      </form>
+
+      <p class="fine" id="modeNote">
+        Manual path always works. Live flight + TSA lookup need a Vercel deploy with optional API keys.
+        TSA figures are a third-party estimate, not TSA-published.
+      </p>
+    </main>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
