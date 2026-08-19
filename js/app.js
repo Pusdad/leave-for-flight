@@ -103,7 +103,7 @@ function setInternational(on, { skipLead = false } = {}) {
 }
 
 function fillExample() {
-  $("flight").value = "AA1234";
+  $("flight").value = "";
   $("date").value = todayYmd(DEFAULT_TZ);
   $("origin").value = "DFW";
   $("depart").value = "10:00";

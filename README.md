@@ -54,7 +54,7 @@ Fill **Overrides & buffers** with:
 
 Boarding is 9:30. Then `9:30 − 12 − 35 − 15 = 8:28`.
 
-Shortcut: open `/?example=1` and tap **Leave by…**.
+Shortcut: open `/?example=1` and tap **Leave by…**. That fills the manual fields only (no invented flight).
 
 Automated check: `npm test` (same numbers).
 
